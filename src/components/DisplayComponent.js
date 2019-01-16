@@ -20,20 +20,15 @@ class DisplayComponent extends Component {
 }
 
 const mapStateToProps = state => {
-
-    // test
-    console.log('-- test state --');
-    console.log(state);
-
     return {
 
     };
 };
 
+// Fire the event directly
 const mapDispatchToProps = dispatch => {
     return {
-        // pass in dispatch, func def, dispatch, then api
-        getDataAPI: () => dispatch(getDataAPI())
+        getDataAPI: () => dispatch({ type: "DISPLAY_COMPONENT_GET_DATA" })
     };
 };
 

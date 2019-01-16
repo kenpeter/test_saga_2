@@ -23,7 +23,7 @@ export default function displayComponentReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                data: action.payload.data,
+                data: action.data,
                 error: null,
             };
         case DISPLAY_COMPONENT_GET_DATA_FAIL:

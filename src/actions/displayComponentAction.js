@@ -1,3 +1,4 @@
+import { takeLatest, call, put } from "redux-saga/effects";
 import axios from 'axios';
 
 export const getData = () => ({
@@ -14,6 +15,42 @@ export const getDataFail = (payload) => ({
     payload: payload,
 });
 
+
+// saga
+export function* watcherSaga() {
+    yield takeLatest("DISPLAY_COMPONENT_GET_DATA", workerSaga);
+}
+
+// saga
+function* workerSaga() {
+    try {
+        const response = yield call(getDataAPI);
+
+
+        // test
+        console.log('worker saga');
+        console.log(response.data);
+
+
+        let data = response.data;
+        yield put({ type: "DISPLAY_COMPONENT_GET_DATA_SUCCESS", data });
+
+    } catch (error) {
+        yield put({ type: "DISPLAY_COMPONENT_GET_DATA_FAIL", error });
+    }
+}
+
+// saga
+function getDataAPI() {
+    return axios({
+        method: "get",
+        url: "https://dog.ceo/api/breeds/image/random"
+    });
+}
+
+
+
+/*
 // NOTE: we put api here, then component import and call
 export function getDataAPI() {
 
@@ -52,3 +89,8 @@ export function getDataAPI() {
         });
     }
 }
+*/
+
+
+
+

@@ -4,13 +4,25 @@ import './index.css';
 import App from './App';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux'
+
+// saga
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
+
 import rootReducer from './reducers'
-import thunk from "redux-thunk";
 
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+// saga
+import { watcherSaga } from "./actions/displayComponentAction";
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(
+    rootReducer,
+    compose(applyMiddleware(sagaMiddleware))
+);
+
+sagaMiddleware.run(watcherSaga);
 
 ReactDOM.render(
     <Provider store={store}>
