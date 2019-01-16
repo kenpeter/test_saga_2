@@ -19,6 +19,7 @@ export function getDataAPI() {
 
     console.log('-- click: call getDataApi --');
 
+    // () => dispatch(...)
     return dispatch => {
         console.log('-- not working? --');
 
@@ -44,6 +45,7 @@ export function getDataAPI() {
                 // app state
                 dispatch(getDataFail(error));
             }
+            return '';
         })
         .catch(error => {
             console.log('request failed', error);

@@ -3,9 +3,6 @@ import React, { Component } from "react";
 // connect
 import { connect } from "react-redux";
 
-// bind
-import { bindActionCreators } from 'redux'
-
 import { getDataAPI } from '../actions/displayComponentAction';
 
 class DisplayComponent extends Component {
@@ -35,7 +32,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getDataAPI: getDataAPI()
+        // pass in dispatch, func def, dispatch, then api
+        getDataAPI: () => dispatch(getDataAPI())
     };
 };
 
